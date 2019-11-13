@@ -96,6 +96,37 @@
   </div>
 
 <script>
+  // assign variable to all the checkbox elements
+  // add click event for checkbox change
+  // add on changes event for if shift key is selected that will change all in between checkboxes to checked
+  // only need to add checks to values between first and last checkbox selection while shift is engaged
+  // if first element is selected and last element is selected, want to turn the elements inbetween to checked as well
+  // set inbetween flag originally to false, and have the loop turn the value to true once the shift event fires and lastcheckbox is selected
+
+  const checkboxes = document.querySelector( '.inbox input[type="checkbox"]');
+
+  let lastChecked;
+
+  function toggleCheckBoxes(e) {
+
+    let inBetween = false;
+    if( e.shiftKey && this.checked ) {
+      checkboxes.forEach( checkbox => {
+        if( checkbox === this || checkbox === lastChecked ) {
+          inBetween = !inBetween;
+        }
+        if(inBetween) {
+          checkbox.checked = true;
+        }
+      });
+    }
+
+    lastChecked = this;
+  }
+
+
+  checkboxes.forEach(checkbox.addEventListener( 'click', toggleCheckBoxes ));
+
 </script>
 </body>
 </html>
