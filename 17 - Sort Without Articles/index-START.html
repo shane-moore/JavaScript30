@@ -46,8 +46,21 @@
   <ul id="bands"></ul>
 
 <script>
-const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
+// first make a copy of the bands array
+// splice out "The", "A", "An" from the beginning of each element if the element includes those characters
+// sort the new array
+// need to keep track of the index of each element in the original array and rearrange to its corresponding new array's sorted index location
+// drop array values into an li elementby looping over array elements and appending new elements to the li
 
+function strip(bandName) {
+  return bandName.replace( /^(a || an || the)/i).trim();
+}
+const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
+const sortedBands = bands.sort( (a,b) => strip(a) > strip(b) ? 1 : -1 );
+
+const bandContainer = document.querySelector('#bands');
+bandContainer.innerHTML = 
+sortedBands.map( band => `<li>${band}</li>` ).join(' ');
 
 </script>
 
